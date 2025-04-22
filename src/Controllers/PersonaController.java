@@ -13,7 +13,25 @@ public class PersonaController {
      * @param personas Array de Persona a ordenar.
      */
     public void ordenarPorEdad(Persona[] personas) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        // Implementación del algoritmo de ordenamiento por inserción
+        for (int i = 1; i < personas.length; i++) {
+            Persona key = personas[i];
+            int j = i - 1;
+    
+                // CompaRAR POR EDAD (ASCENDENTE )
+            while (j >= 0 && personas[j].edad > key.edad) {
+                personas[j + 1] = personas[j];
+                j = j - 1;
+            }
+                personas[j + 1] = key;
+        }
+    
+            // Print sorted array
+            for (Persona persona : personas) {
+                System.out.println(persona);
+            }
+        }
+       /**
     }
 
     /**
@@ -26,7 +44,25 @@ public class PersonaController {
      *         encuentra.
      */
     public Persona buscarPorEdad(Persona[] personas, int edad) {
-        throw new UnsupportedOperationException("Not implemented yet.");
-
+        int left = 0;  
+        int right = personas.length - 1;  
+    
+        // Asegúrate de que el arreglo esté ordenado por edad para que la búsqueda binaria funcione correctamente  
+        while (left <= right) {  
+            int mid = left + (right - left) / 2;  
+    
+            // Se asegura de que el valor de 'mid' no intente acceder a una posición nula  
+            if (personas[mid] != null && personas[mid].edad == edad) {  
+                return personas[mid];  
+            } else if (personas[mid] != null && personas[mid].edad < edad) {  
+                left = mid + 1;  
+            } else {  
+                right = mid - 1;  
+            }  
+        }  
+        return null; // No se encontró ninguna coincidencia  
     }
+
+
+    
 }
